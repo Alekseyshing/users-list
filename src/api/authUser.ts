@@ -1,5 +1,6 @@
 import api from './axiosUser'
 
+
 export class AuthUser {
   static async registration(username: string, email: string, password: string) {
     try {
@@ -26,7 +27,7 @@ export class AuthUser {
       if (result.status === 200) {
         // setAuth(true);
         // setUsername(result.data.username)
-        localStorage.setItem('auth', JSON.stringify(result.data));
+        localStorage.setItem('token', JSON.stringify(result.data));
         console.log(result.data);
 
         return true;

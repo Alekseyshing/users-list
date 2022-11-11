@@ -45,7 +45,7 @@ export const LoginPage = () => {
             <input ref={passwordLoginRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
           </label>
 
-          <button className="w-full bg-[#512689] text-white text-base">
+          <button className="w-full bg-[#512689] text-white text-base py-[13px] rounded-[8px]">
             {/* {spinner ? <Spinner top={5} left={20} /> : currentAuthTitle} */}
             Войти
           </button>
