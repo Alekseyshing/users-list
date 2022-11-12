@@ -5,6 +5,9 @@ import { merge } from "../../services/ts/merge";
 import { generateId, generateRandomString } from "../../utils/generateRandomIndex";
 import { BtnExit } from "../BtnExit/BtnExit"
 import { UserCard } from "./UserCard";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { userSlice } from "../../store/reducers/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 export const UsersPage = () => {
   const token = useToken();
@@ -12,10 +15,21 @@ export const UsersPage = () => {
   const [users2] = useUsersData(token.myToken.token, 2);
   const users = users1?.concat(users2 as IUsersData[]);
 
+  const { isLoggedSuccess } = userSlice.actions;
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleExit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    localStorage.removeItem('token');
+    dispatch(isLoggedSuccess(false));
+    navigate('/login')
+  }
+
   const genericUsers = users?.map((user) => {
     const USERS = [
       {
-        element: [<UserCard key={user?.id} id={user?.id} email={user?.email} first_name={user?.first_name} avatar={user?.avatar} last_name={user?.last_name} />],
+        element: [<UserCard key={generateRandomString()} id={user?.id} email={user?.email} first_name={user?.first_name} avatar={user?.avatar} last_name={user?.last_name} />],
         // className: `${'min-w-[160px] w-full gap-2 text-xl text-black'}`,
       }
     ].map(generateId)
@@ -34,7 +48,9 @@ export const UsersPage = () => {
   return (
     <div>
       <header className="flex flex-col gap-[16px] items-center text-center pt-[23px] md:pt-[32px] pl-[20px] pr-[20px]  pb-[64px] bg-[#512689] transition-all ease-in-out duration-75 active:text-[#512689] mb-[32px] sm:mb-[48px]">
-        <button className="outline-none rounded-[8px] focus:outline-none p-[11px] sm:px-[16px] sm:py-[8px] sm:border-[#f8f8f8] ml-auto mr-[3px] bg-transparent  transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7] outline-0">
+        <button
+          onClick={handleExit}
+          className="outline-none rounded-[8px] focus:outline-none p-[11px] sm:px-[16px] sm:py-[8px] sm:border-[#f8f8f8] ml-auto mr-[3px] bg-transparent  transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7] outline-0">
           <span className="text-white text-[16px] leading-[22px] hidden sm:block display-none transition-all ease-in-out duration-75 ">Выход</span>
           <BtnExit />
         </button>

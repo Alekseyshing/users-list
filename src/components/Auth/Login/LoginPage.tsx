@@ -1,12 +1,18 @@
 import { MutableRefObject, useRef } from "react"
 import { AuthUser } from "../../../api/authUser";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { userSlice } from "../../../store/reducers/UserSlice";
 
 
 export const LoginPage = () => {
   const userEmailLoginRef = useRef() as MutableRefObject<HTMLInputElement>;
   const passwordLoginRef = useRef() as MutableRefObject<HTMLInputElement>;
   const navigate = useNavigate();
+
+  const { isLogged } = useAppSelector(state => state.userReducer)
+  const { isLoggedSuccess } = userSlice.actions;
+  const dispatch = useAppDispatch();
 
   const handleAuth = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,7 +28,9 @@ export const LoginPage = () => {
 
 
     const result = await AuthUser.login(email, password);
+    dispatch(isLoggedSuccess(!isLogged));
     console.log(result);
+
     navigate('/users')
     // handleAuthResponse(result, '/users', 'Вход выполнен')
   }

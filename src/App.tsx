@@ -3,14 +3,13 @@ import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-d
 import { LoginPage } from "./components/Auth/Login/LoginPage";
 import { RegistrationPage } from "./components/Auth/Registration/RegistrationPage";
 import { UsersPage } from "./components/Users/UsersPage";
-import { usersContext } from "./Context/usersContext";
-import useToken from "./hooks/useToken";
-import { useUsersData } from "./hooks/useUsersData";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { userSlice } from "./store/reducers/UserSlice";
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const isLoggedIn = useAppSelector(state => state.userReducer).isLogged;
 
   return (
     <Router>
@@ -25,5 +24,4 @@ function App() {
     </Router>
   )
 }
-
 export default App
