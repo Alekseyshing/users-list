@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import { LoginPage } from "./components/Auth/Login/LoginPage";
 import { RegistrationPage } from "./components/Auth/Registration/RegistrationPage";
 import { UsersPage } from "./components/Users/UsersPage";
-import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import { userSlice } from "./store/reducers/UserSlice";
+import { useAppSelector } from "./hooks/redux";
 
 
 function App() {

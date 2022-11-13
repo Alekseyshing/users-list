@@ -63,7 +63,7 @@ export const RegistrationPage = () => {
             <input ref={passwordConfirmRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
           </label>
 
-          <button className="w-full bg-[#512689] text-white text-base py-[13px] rounded-[8px]">
+          <button className="w-full bg-[#512689] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
             {/* {spinner ? <Spinner top={5} left={20} /> : currentAuthTitle} */}
             Зарегистрироваться
           </button>

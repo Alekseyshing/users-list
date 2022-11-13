@@ -1,0 +1,22 @@
+.icon {
+  fill: #F8F8F8; 
+  stroke: #151317;
+}
+
+.icon-violet {
+  fill: #512689; 
+  stroke: none;
+}
+
+button {
+  transition: background-color 0.3s ease-in;
+}
+
+button svg {
+  fill: #F8F8F8;
+  transition: fill 0.3s ease-in;
+}
+
+button:hover svg{
+  fill: #D8BFD8;
+}

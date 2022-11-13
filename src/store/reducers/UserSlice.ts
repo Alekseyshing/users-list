@@ -13,7 +13,7 @@ const initialState: UserState = {
   users: [],
   isLoading: false,
   error: '',
-  isLogged: false
+  isLogged: false,
 }
 
 export const userSlice = createSlice({
@@ -22,6 +22,18 @@ export const userSlice = createSlice({
   reducers: {
     isLoggedSuccess(state, action: PayloadAction<boolean>) {
       state.isLogged = !state.isLogged
+    },
+    usersFetching(state) {
+      state.isLoading = true;
+    },
+    usersFetchingSuccess(state, action: PayloadAction<IUser[]>) {
+      state.isLoading = false;
+      state.error = '';
+      state.users = action.payload
+    },
+    usersFetchingError(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.error = action.payload;
     }
   }
 })
