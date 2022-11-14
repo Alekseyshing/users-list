@@ -1,6 +1,7 @@
 import { IUser } from "../../models/IUser"
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
+import { fetchUsers } from "./ActionsCreators";
 
 interface UserState {
   users: IUser[];
@@ -34,8 +35,8 @@ export const userSlice = createSlice({
     usersFetchingError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
-    }
-  }
+    },
+  },
 })
 
 export default userSlice.reducer;

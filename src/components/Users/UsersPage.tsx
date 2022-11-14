@@ -19,7 +19,6 @@ export const UsersPage = () => {
   const { token } = useToken()
 
 
-
   useEffect(() => {
     dispatch(fetchUsers(token));
   }, [])
@@ -65,6 +64,8 @@ export const UsersPage = () => {
         </p>
       </header>
       <main className="px-[80px]">
+        {isLoading && <h1>Идет загрузка</h1>}
+        {error && <h1>{error}</h1>}
         <ul className="flex gap-[20px] flex-wrap mb-[65px] items-center justify-center">
           {genericUsers}
         </ul>
