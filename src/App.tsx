@@ -1,13 +1,17 @@
-import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Navigate, useParams } from "react-router-dom";
 import { LoginPage } from "./components/Auth/Login/LoginPage";
 import { RegistrationPage } from "./components/Auth/Registration/RegistrationPage";
-import { UsersPage } from "./components/Users/UsersPage";
-import { useAppSelector } from "./hooks/redux";
+import { UserPage } from "./components/Users/UserPage/UserPage";
+import { UsersPage } from "./components/Users/UsersPage/UsersPage";
+import { useAppDispatch, useAppSelector } from "./hooks/redux";
+import { usersSlice } from "./store/reducers/UsersSlice";
 
 
 function App() {
 
   const isLoggedIn = useAppSelector(state => state.userReducer).isLogged;
+  let { userId } = useParams();
+
 
   return (
     <Router>
@@ -17,7 +21,7 @@ function App() {
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/users" element={<UsersPage />} />
-        {/* <Route path="/costs" element={isLoggedIn ? <CostsPage /> : <Navigate to='/login' />} />  */}
+        <Route path="/users/:userId" element={<UserPage />} />
       </Routes>
     </Router>
   )

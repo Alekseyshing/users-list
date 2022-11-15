@@ -1,17 +1,29 @@
-import { IUser } from "../../models/IUser"
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
-import { fetchUsers } from "./ActionsCreators";
+import { IUserDetails } from "../../models/IUserDetails"
+
 
 interface UserState {
-  users: IUser[];
+  user: IUserDetails;
   isLoading: boolean;
   error: string;
   isLogged: boolean;
 }
 
 const initialState: UserState = {
-  users: [],
+  user: {
+    data: {
+      id: 0,
+      first_name: '',
+      email: '',
+      last_name: '',
+      avatar: ''
+    },
+    support: {
+      url: '',
+      text: ''
+    }
+  },
   isLoading: false,
   error: '',
   isLogged: false,
@@ -21,18 +33,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    isLoggedSuccess(state, action: PayloadAction<boolean>) {
-      state.isLogged = !state.isLogged
-    },
-    usersFetching(state) {
+    userFetching(state) {
       state.isLoading = true;
     },
-    usersFetchingSuccess(state, action: PayloadAction<IUser[]>) {
+    userFetchingSuccess(state, action: PayloadAction<IUserDetails>) {
       state.isLoading = false;
       state.error = '';
-      state.users = action.payload
+      state.user = action.payload
     },
-    usersFetchingError(state, action: PayloadAction<string>) {
+    userFetchingError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },

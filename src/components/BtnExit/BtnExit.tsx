@@ -1,15 +1,6 @@
-import { HTMLAttributes, DetailedHTMLProps, ReactNode } from "react";
+import { HTMLAttributes, DetailedHTMLProps } from "react";
 
-export const icons = {
-  close,
-}
-
-export type IconName = keyof typeof icons;
-
-
-export interface IBtnExitProps extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
-
-}
+export interface IBtnExitProps extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> { }
 
 export const BtnExit = ({ }: IBtnExitProps): JSX.Element => {
   return (

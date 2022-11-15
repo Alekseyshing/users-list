@@ -4,7 +4,7 @@ import './styles.css';
 export const Spinner = ({ top, left }: ISpinnerProps) => {
   return (
     <div
-      style={{ top: `${top}px`, left: `${left}px` }}
+      style={{ top: `${top}px`, left: `${left}%` }}
       className='spinner-border main-spinner' role='status'
     />
 

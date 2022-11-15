@@ -24,6 +24,8 @@ export class AuthUser {
     try {
       const result = await api.post('/api/login', { email, password });
 
+      console.log(result.status);
+
       if (result.status === 200) {
         // setAuth(true);
         // setUsername(result.data.username)

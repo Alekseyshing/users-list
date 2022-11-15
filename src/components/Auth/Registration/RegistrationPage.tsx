@@ -3,7 +3,7 @@ import { MutableRefObject, useRef, useState } from "react"
 import { AuthUser } from "../../../api/authUser";
 import { Link, useNavigate } from "react-router-dom";
 import { handleAlertMessage } from "../../../utils/Auth";
-import { validationInputs } from "../../../utils/validation";
+import { validationRegistrationInputs } from "../../../utils/validationRegidtration";
 import { Alert } from "../../Alert/Alert";
 import { $alert } from "../../../Context/alert";
 import { Spinner } from "../../Spinner/Spinner";
@@ -19,7 +19,7 @@ export const RegistrationPage = () => {
   const navigate = useNavigate();
   const alert = useStore($alert);
 
-  const handleAuthResponse = (
+  const handleRegistationResponse = (
     result: boolean | undefined,
     navigatePath: string,
     alertText: string
@@ -36,7 +36,7 @@ export const RegistrationPage = () => {
 
   const handleRegistration = async (username: string, email: string, password: string, passwordConfirm: string) => {
 
-    if (!validationInputs(userNameRef, userEmailRef, passwordRef, passwordConfirmRef)) {
+    if (!validationRegistrationInputs(userNameRef, userEmailRef, passwordRef, passwordConfirmRef)) {
       return
     }
 
@@ -61,7 +61,7 @@ export const RegistrationPage = () => {
     const result = await AuthUser.registration(username, email, password);
     setSpinner(true);
     handleAlertMessage({ alertText: 'Успешная регистрация', alertStatus: 'success' });
-    handleAuthResponse(result, '/login', 'Регистрация выполнена')
+    handleRegistationResponse(result, '/login', 'Регистрация выполнена')
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -97,7 +97,7 @@ export const RegistrationPage = () => {
             <input ref={passwordConfirmRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
           </label>
 
-          <button className="w-full min-h-[48px] relative bg-[#512689] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
+          <button className="w-full sm:min-h-[48px] relative bg-[#512689] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
             {spinner ? <Spinner top={10} /> : 'Зарегистрироваться'}
           </button>
         </form>

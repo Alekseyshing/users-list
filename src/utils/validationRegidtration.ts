@@ -2,7 +2,7 @@ import { MutableRefObject } from "react";
 import { handleAlertMessage } from "./Auth";
 import validator from "validator";
 
-export const validationInputs = (
+export const validationRegistrationInputs = (
   nameInput: MutableRefObject<HTMLInputElement>,
   emailInput: MutableRefObject<HTMLInputElement>,
   passwordInput: MutableRefObject<HTMLInputElement>,

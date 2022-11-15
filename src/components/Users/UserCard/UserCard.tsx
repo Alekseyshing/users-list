@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { IUser } from "../../models/IUser";
-import { generateRandomString } from "../../utils/generateRandomIndex";
+import { IUser } from "../../../models/IUser";
+import { generateRandomString } from "../../../utils/generateRandomIndex";
 import "./styles.css";
+import { Link } from "react-router-dom"
 
-export const UserCard = ({ first_name, avatar, last_name }: IUser) => {
+export const UserCard = ({ first_name, avatar, last_name, id }: IUser) => {
   const [like, setLike] = useState(false)
 
   return (
     <article key={generateRandomString()} className="flex flex-col gap-[16px] items-center justify-center ">
       <img src={avatar} alt="user-foto" className="rounded-[50%] min-h-[124px] max-w-[124px] object-cover" />
-      <span>{first_name}&nbsp;{last_name}</span>
+      <Link to={`${id}`}>{first_name}&nbsp;{last_name}</Link>
       <button
         onClick={() => setLike(!like)}
         className="p-[8px] bg-[#F8F8F8] rounded-[4px] outline-0 focus:outline-0 border-none ml-auto hover:bg-white active:bg-[#008080]"

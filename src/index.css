@@ -39,6 +39,12 @@ input {
   border: solid 1px #f2f2f2;
 }
 
+:root {
+  --main-color: #512689;
+  --hover-color: #8025f7;
+  --active-color: #700fee;
+}
+
 @media () {
   button {
     background-color: #f9f9f9;
