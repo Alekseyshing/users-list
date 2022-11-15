@@ -43,6 +43,7 @@ input {
   --main-color: #512689;
   --hover-color: #8025f7;
   --active-color: #700fee;
+  --border-color: #f8f8f8;
 }
 
 @media () {
