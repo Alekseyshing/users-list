@@ -45,10 +45,10 @@ React приложение, которое умеет показывать сл�
 
 - [Tailwindcss](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [React-icons](https://react-icons.github.io/react-icons/)
 - [Axios](https://axios-http.com/)
-- [React UI Tools](https://mui.com/)
 - [Redux-Toolkit](https://redux-toolkit.js.org/)
+- [React-router-dom](https://reactrouter.com/en/main)
+- [Vite](https://vitejs.dev/guide/env-and-mode.html)
 
 ## Использование
 
