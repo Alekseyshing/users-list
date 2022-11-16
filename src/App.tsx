@@ -3,13 +3,14 @@ import { LoginPage } from "./components/Auth/Login/LoginPage";
 import { RegistrationPage } from "./components/Auth/Registration/RegistrationPage";
 import { UserPage } from "./components/Users/UserPage/UserPage";
 import { UsersPage } from "./components/Users/UsersPage/UsersPage";
-import { useAppDispatch, useAppSelector } from "./hooks/redux";
-import { usersSlice } from "./store/reducers/UsersSlice";
+import { useAppSelector } from "./hooks/redux";
+
+
 
 
 function App() {
 
-  const isLoggedIn = useAppSelector(state => state.userReducer).isLogged;
+  const isLoggedIn = useAppSelector(state => state.usersReducer).isLogged;
   let { userId } = useParams();
 
 

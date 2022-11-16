@@ -1,17 +1,11 @@
 import api from './axiosUser'
 
-
 export class AuthUser {
   static async registration(username: string, email: string, password: string) {
     try {
       const result = await api.post('/api/users', { username, email, password });
-      console.log(result);
-
 
       if (result.status === 201) {
-        // setAuth(false);
-        console.log('201');
-
         return true;
       }
       return false;
@@ -24,14 +18,8 @@ export class AuthUser {
     try {
       const result = await api.post('/api/login', { email, password });
 
-      console.log(result.status);
-
       if (result.status === 200) {
-        // setAuth(true);
-        // setUsername(result.data.username)
         localStorage.setItem('token', JSON.stringify(result.data));
-        console.log(result.data);
-
         return true;
       }
       return false;

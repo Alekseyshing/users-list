@@ -1,5 +1,5 @@
 import { GenericList } from "../../../GenericList/GenericList";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from 'react-responsive';
 import { merge } from "../../../services/ts/merge";
 import { generateId, generateRandomString } from "../../../utils/generateRandomIndex";
 import { BtnExit } from "../../Buttons/BtnExit/BtnExit"
@@ -10,17 +10,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchUsers } from "../../../store/reducers/ActionsCreators";
 import useToken from "../../../hooks/useToken";
-import './styles.css'
+import './styles.css';
 
 export const UsersPage = () => {
 
   const dispatch = useAppDispatch();
-  const { users, isLoading, error } = useAppSelector(state => state.userReducer)
+  const { users, isLoading, error } = useAppSelector(state => state.usersReducer)
   const { isLoggedSuccess } = usersSlice.actions;
   const navigate = useNavigate();
   const { token } = useToken();
   const [showMore, setShowMore] = useState(false);
-  const isMobile = useMediaQuery({ query: '(max-width: 630px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 630px)' });
 
   useEffect(() => {
     dispatch(fetchUsers(token));
@@ -38,13 +38,13 @@ export const UsersPage = () => {
     e.preventDefault();
     localStorage.removeItem('token');
     dispatch(isLoggedSuccess(false));
-    navigate('/login')
+    navigate('/login');
   }
 
   const genericUsers = users?.slice(0, !isMobile ? numberOfUsers : numberOfUsersMobile).map((user) => {
     const USERS = [
       {
-        element: [<UserCard key={generateRandomString()} id={user?.id} email={user?.email} first_name={user?.first_name} avatar={user?.avatar} last_name={user?.last_name} />],
+        element: [<UserCard key={generateRandomString()} id={user?.id} email={user?.email} first_name={user?.first_name} avatar={user?.avatar} last_name={user?.last_name} like={user.like} />],
         className: 'border rounded-[10px] p-[20px] pt-[36px] min-w-[305px] shadow-[0_1px_3.98px_0px_rgba(51,51,51,0.15)]',
       }
     ].map(generateId)

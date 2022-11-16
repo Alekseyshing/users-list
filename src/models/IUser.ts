@@ -4,4 +4,5 @@ export interface IUser {
   first_name: string;
   avatar: string;
   last_name: string;
+  like?: boolean;
 }

@@ -6,7 +6,7 @@ import { User } from "../User/User";
 
 
 export const UserPage = () => {
-  const { user } = useAppSelector(state => state.newReducer)
+  const { user } = useAppSelector(state => state.userReducer)
   const dispatch = useAppDispatch();
   const params = useParams();
 

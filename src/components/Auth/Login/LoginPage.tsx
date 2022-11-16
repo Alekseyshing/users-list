@@ -16,12 +16,10 @@ export const LoginPage = () => {
   const passwordLoginRef = useRef() as MutableRefObject<HTMLInputElement>;
   const navigate = useNavigate();
   const [spinner, setSpinner] = useState(false);
-  const { isLogged } = useAppSelector(state => state.userReducer)
+  const { isLogged } = useAppSelector(state => state.usersReducer)
   const { isLoggedSuccess } = usersSlice.actions;
   const dispatch = useAppDispatch();
   const alert = useStore($alert);
-  console.log(alert);
-
 
   const handleAuth = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
