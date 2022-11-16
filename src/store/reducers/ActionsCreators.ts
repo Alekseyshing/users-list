@@ -13,7 +13,7 @@ export const fetchUsers = (token: string) => async (dispatch: AppDispatch) => {
       if (localStorage.getItem('users')) {
         const users = JSON.parse(localStorage.getItem("users") as string);
         localStorage.setItem('users', JSON.stringify(users));
-        dispatch(usersSlice.actions.usersFetchingSuccess(users))
+        dispatch(usersSlice.actions.usersFetchingSuccess(users));
       } else {
         localStorage.setItem('users', JSON.stringify(response.data.data));
         let users2: IUser[] = JSON.parse(localStorage.getItem("users") as string);

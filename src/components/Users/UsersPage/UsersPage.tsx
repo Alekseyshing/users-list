@@ -21,18 +21,8 @@ export const UsersPage = () => {
   const { token } = useToken();
   const [showMore, setShowMore] = useState(false);
   const isMobile = useMediaQuery({ query: '(max-width: 630px)' });
-
-  useEffect(() => {
-    dispatch(fetchUsers(token));
-  }, [])
-
   const numberOfUsers = showMore ? users.length : 8;
   const numberOfUsersMobile = showMore ? users.length : 4;
-
-  const handleShowMore = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setShowMore(true);
-  }
 
   const handleExit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -40,6 +30,17 @@ export const UsersPage = () => {
     dispatch(isLoggedSuccess(false));
     navigate('/login');
   }
+
+  const handleShowMore = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    const usersRefresh = JSON.parse(localStorage.getItem("users") as string);
+    dispatch(usersSlice.actions.usersFetchingSuccess(usersRefresh));
+    setShowMore(true);
+  }
+
+  useEffect(() => {
+    dispatch(fetchUsers(token));
+  }, [])
 
   const genericUsers = users?.slice(0, !isMobile ? numberOfUsers : numberOfUsersMobile).map((user) => {
     const USERS = [
