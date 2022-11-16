@@ -9,12 +9,14 @@ export const UserCard = ({ first_name, avatar, last_name, id, like }: IUser) => 
   const [isLiked, setIsLiked] = useState(like);
   const handleLike = (id: number) => {
     const users: IUser[] = JSON.parse(localStorage.getItem("users") as string);
+    const indexOfLikedUser = users.map((user) => user.id).indexOf(id)
+
     const updatedUser = users.find((item) => item.id === id);
     (updatedUser as IUser).like = !updatedUser?.like
     const updUsers = [
       ...users,
-      updatedUser
     ]
+    updUsers[indexOfLikedUser] = updatedUser as IUser;
     setIsLiked(!isLiked);
     localStorage.setItem('users', JSON.stringify(updUsers));
   }
