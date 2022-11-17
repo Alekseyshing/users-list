@@ -45,8 +45,12 @@ export const UsersPage = () => {
   const genericUsers = users?.slice(0, !isMobile ? numberOfUsers : numberOfUsersMobile).map((user) => {
     const USERS = [
       {
-        element: [<UserCard key={generateRandomString()} id={user?.id} email={user?.email} first_name={user?.first_name} avatar={user?.avatar} last_name={user?.last_name} like={user.like} />],
-        className: 'border rounded-[10px] p-[20px] pt-[36px] min-w-[305px] shadow-[0_1px_3.98px_0px_rgba(51,51,51,0.15)]',
+        element: [
+          <UserCard key={generateRandomString()} id={user?.id} email={user?.email} first_name={user?.first_name}
+            avatar={user?.avatar} last_name={user?.last_name} like={user.like} />
+        ],
+        className:
+          'border rounded-[10px] p-[20px] pt-[36px] min-w-[305px] shadow-[0_1px_3.98px_0px_rgba(51,51,51,0.15)]',
       }
     ].map(generateId)
 
