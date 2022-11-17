@@ -79,25 +79,25 @@ export const RegistrationPage = () => {
           onSubmit={handleSubmit}>
           <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Имя</span>
-            <input ref={userNameRef} type="text" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="Артур" />
+            <input ref={userNameRef} type="text" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="Артур" />
           </label>
 
           <label className="flex flex-col items-left gap-[8px]  w-full">
             <span className="text-base">Электронная почта</span>
-            <input ref={userEmailRef} type="text" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="example@mail.ru" />
+            <input ref={userEmailRef} type="text" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="example@mail.ru" />
           </label>
 
           <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Пароль</span>
-            <input ref={passwordRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
+            <input ref={passwordRef} type="password" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="******" />
           </label>
 
           <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Подтвердите пароль</span>
-            <input ref={passwordConfirmRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
+            <input ref={passwordConfirmRef} type="password" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="******" />
           </label>
 
-          <button className="w-full sm:min-h-[48px] relative bg-[#512689] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
+          <button className="w-full sm:min-h-[48px] relative bg-[var(--main-color)] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
             {spinner ? <Spinner top={10} /> : 'Зарегистрироваться'}
           </button>
         </form>

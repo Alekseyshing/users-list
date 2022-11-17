@@ -83,15 +83,15 @@ export const LoginPage = () => {
 
           <label className="flex flex-col items-left gap-[8px]  w-full">
             <span className="text-base">Электронная почта</span>
-            <input ref={userEmailLoginRef} type="text" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="example@mail.ru" />
+            <input ref={userEmailLoginRef} type="text" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="example@mail.ru" />
           </label>
 
           <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Пароль</span>
-            <input ref={passwordLoginRef} type="password" className="p-[16px] bg-[#f8f8f8] rounded-lg" placeholder="******" />
+            <input ref={passwordLoginRef} type="password" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="******" />
           </label>
 
-          <button className="w-full sm:min-h-[48px] flex items-center justify-center relative bg-[var(--main-color)] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[#700fee] hover:bg-[#8025f7]">
+          <button className="w-full sm:min-h-[48px] flex items-center justify-center relative bg-[var(--main-color)] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[var(--active-color)] hover:bg-[#8025f7]">
             {spinner ? <Spinner top={10} left={50} /> : 'Войти'}
           </button>
         </form>
