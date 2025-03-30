@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = process.env.NODE_ENV === 'production' 
-  ? '/api'  // Для продакшена используем относительный путь
+  ? 'https://users-list-rosy.vercel.app/api'  // Для продакшена используем полный URL
   : 'http://localhost:5001/api';  // Для разработки используем локальный сервер
 
 const api = axios.create({
