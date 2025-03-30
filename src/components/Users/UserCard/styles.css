@@ -1,11 +1,13 @@
 .icon {
-  fill: var(--border-color); 
-  stroke: #151317;
+  stroke: var(--main-color);
+  fill: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .icon-violet {
-  fill: var(--main-color); 
-  stroke: none;
+  stroke: var(--main-color);
+  fill: var(--main-color);
+  transition: all 0.2s ease-in-out;
 }
 
 button {

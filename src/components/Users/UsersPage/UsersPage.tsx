@@ -24,6 +24,8 @@ export const UsersPage = () => {
   const numberOfUsers = showMore ? users.length : 8;
   const numberOfUsersMobile = showMore ? users.length : 4;
 
+  console.log('UsersPage render:', { users, isLoading, error, token });
+
   const handleExit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     localStorage.removeItem('token');
@@ -33,18 +35,30 @@ export const UsersPage = () => {
 
   const handleShowMore = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    const usersRefresh = JSON.parse(localStorage.getItem("users") as string);
-    dispatch(usersSlice.actions.usersFetchingSuccess(usersRefresh));
     setShowMore(true);
   }
 
   useEffect(() => {
+    console.log('useEffect triggered with token:', token);
     if (token) {
       dispatch(fetchUsers(token));
     }
   }, [dispatch, token])
 
   const displayedUsers = users?.slice(0, !isMobile ? numberOfUsers : numberOfUsersMobile);
+  console.log('Displayed users:', displayedUsers);
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="flex justify-center items-center h-screen text-red-500">{error}</div>;
+  }
+
+  if (!users || users.length === 0) {
+    return <div className="flex justify-center items-center h-screen">No users found</div>;
+  }
 
   return (
     <div>
@@ -74,9 +88,10 @@ export const UsersPage = () => {
                 key={user.id}
                 id={user.id}
                 email={user.email}
-                first_name={user.first_name}
-                avatar={user.avatar}
-                last_name={user.last_name}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                isAdmin={user.isAdmin}
+                createdAt={user.createdAt}
                 like={user.like}
               />
             )}

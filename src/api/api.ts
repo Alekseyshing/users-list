@@ -43,13 +43,27 @@ export const register = async (email: string, password: string, firstName: strin
 };
 
 export const getUsers = async () => {
-  const response = await api.get('/users');
-  return response.data;
+  console.log('Fetching users...');
+  try {
+    const response = await api.get('/users');
+    console.log('Users response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
 };
 
 export const getUser = async (id: string) => {
-  const response = await api.get(`/users/${id}`);
-  return response.data;
+  console.log('Fetching user:', id);
+  try {
+    const response = await api.get(`/users/${id}`);
+    console.log('User response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
 };
 
 export default api; 

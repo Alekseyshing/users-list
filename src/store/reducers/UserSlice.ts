@@ -12,17 +12,13 @@ interface UserState {
 
 const initialState: UserState = {
   user: {
-    data: {
-      id: 0,
-      first_name: '',
-      email: '',
-      last_name: '',
-      avatar: ''
-    },
-    support: {
-      url: '',
-      text: ''
-    }
+    id: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    isAdmin: false,
+    createdAt: '',
+    like: false
   },
   isLoading: false,
   error: '',

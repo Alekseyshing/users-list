@@ -1,13 +1,9 @@
 export interface IUserDetails {
-  data: {
-    id: number;
-    email: string;
-    first_name: string;
-    avatar: string;
-    last_name: string;
-  },
-  support: {
-    url: string,
-    text: string
-  }
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isAdmin: boolean;
+  createdAt: string;
+  like?: boolean;
 }
