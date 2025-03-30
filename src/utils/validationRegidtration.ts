@@ -3,43 +3,56 @@ import { handleAlertMessage } from "./Auth";
 import validator from "validator";
 
 export const validationRegistrationInputs = (
-  nameInput: MutableRefObject<HTMLInputElement>,
-  emailInput: MutableRefObject<HTMLInputElement>,
-  passwordInput: MutableRefObject<HTMLInputElement>,
-  passworConfirmInput: MutableRefObject<HTMLInputElement>
+  firstNameRef: MutableRefObject<HTMLInputElement>,
+  lastNameRef: MutableRefObject<HTMLInputElement>,
+  emailRef: MutableRefObject<HTMLInputElement>,
+  passwordRef: MutableRefObject<HTMLInputElement>,
+  passwordConfirmRef: MutableRefObject<HTMLInputElement>
 ) => {
-  const nameInputValue = nameInput.current.value;
-  const emailInputValue = emailInput.current.value;
-  const passwordInputValue = passwordInput.current.value;
-  const passwordConfirmInputValue = passworConfirmInput.current.value;
+  const firstName = firstNameRef.current.value;
+  const lastName = lastNameRef.current.value;
+  const email = emailRef.current.value;
+  const password = passwordRef.current.value;
+  const passwordConfirm = passwordConfirmRef.current.value;
 
   const inputs = [
-    nameInput.current,
-    emailInput.current,
-    passwordInput.current,
-    passworConfirmInput.current
-  ]
+    firstNameRef.current,
+    lastNameRef.current,
+    emailRef.current,
+    passwordRef.current,
+    passwordConfirmRef.current,
+  ];
 
   const addDangerBorderByCondition = () => {
     inputs.forEach(input => input.value.length
       ? input.classList.remove('border-danger')
-      : input.classList.add('border-danger'))
-  }
+      : input.classList.add('border-danger'));
+  };
 
-  if (!nameInputValue || !emailInputValue || !passwordInputValue || !passwordConfirmInputValue) {
+  if (!firstName || !lastName || !email || !password || !passwordConfirm) {
     handleAlertMessage({ alertText: 'Заполните все поля', alertStatus: 'warning' });
     addDangerBorderByCondition();
-    return false
+    return false;
   }
 
-  if (!validator.isEmail(emailInputValue)) {
-    handleAlertMessage({ alertText: "Введите Email!", alertStatus: 'warning' });
-    addDangerBorderByCondition();
-    emailInput.current.classList.add('border-danger');
-    return false
+  if (!validator.isEmail(email)) {
+    handleAlertMessage({ alertText: "Введите корректный Email!", alertStatus: 'warning' });
+    emailRef.current.classList.add('border-danger');
+    return false;
+  }
+
+  if (password.length < 4) {
+    handleAlertMessage({ alertText: 'Пароль должен содержать более 4-х символов', alertStatus: 'warning' });
+    passwordRef.current.classList.add('border-danger');
+    return false;
+  }
+
+  if (password !== passwordConfirm) {
+    handleAlertMessage({ alertText: 'Пароли должны совпадать', alertStatus: 'warning' });
+    passwordConfirmRef.current.classList.add('border-danger');
+    return false;
   }
 
   inputs.forEach(input => input.classList.remove('border-danger'));
-
-  return true
-}
+  return true;
+};

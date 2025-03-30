@@ -1,8 +1,9 @@
 export interface IUser {
-  id: number;
+  id: string;
   email: string;
-  first_name: string;
-  avatar: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
+  isAdmin: boolean;
+  createdAt: string;
   like?: boolean;
 }

@@ -2,7 +2,7 @@ import { HTMLAttributes, DetailedHTMLProps } from "react";
 
 export interface IBtnExitProps extends DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement> { }
 
-export const BtnExit = ({ }: IBtnExitProps): JSX.Element => {
+export const BtnExit = (props: IBtnExitProps): JSX.Element => {
   return (
     <div className="sm:hidden p-0">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

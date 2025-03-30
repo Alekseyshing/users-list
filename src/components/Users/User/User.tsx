@@ -11,10 +11,9 @@ interface IUserInterface {
   first_name: string,
   last_name: string,
   avatar: string,
-  text: string,
 }
 
-export const User = ({ email, first_name, last_name, text, avatar }: IUserInterface) => {
+export const User = ({ email, first_name, last_name, avatar }: IUserInterface) => {
   const dispatch = useAppDispatch();
   const { isLoggedSuccess } = usersSlice.actions;
   const navigate = useNavigate();
@@ -105,9 +104,9 @@ export const User = ({ email, first_name, last_name, text, avatar }: IUserInterf
           <br></br>
           <br></br>
           В работе с клиентами недостаточно просто решить конкретную проблему или помочь справиться с трудностями.
-          Не менее важно уделять внимание обмену знаниями: "Один из самых позитивных моментов — это осознание того,
+          Не менее важно уделять внимание обмену знаниями: &ldquo;Один из самых позитивных моментов — это осознание того,
           что ты помог клиенту перейти на совершенно новый уровень компетентности, уверенность в том, что после
-          окончания проекта у клиента есть все необходимое, чтобы дальше развиваться самостоятельно".
+          окончания проекта у клиента есть все необходимое, чтобы дальше развиваться самостоятельно&rdquo;.
           <br></br>
           <br></br>
           Помимо разнообразных проектов для клиентов финансового сектора, Сорин ведет активную предпринимательскую
@@ -121,7 +120,7 @@ export const User = ({ email, first_name, last_name, text, avatar }: IUserInterf
           </div>
           <div className="flex items-center gap-[10px]">
             <EmailIcon />
-            <a href="email:{email}" className="text-[16px] leading-[22px]">{email}</a>
+            <a href={`mailto:${email}`} className="text-[16px] leading-[22px]">{email}</a>
           </div>
         </div>
       </main>

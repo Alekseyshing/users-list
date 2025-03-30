@@ -1,6 +1,6 @@
 import { MutableRefObject, useRef, useState } from "react";
 import { useStore } from "effector-react";
-import { AuthUser } from "../../../api/authUser";
+import { login } from "../../../api/api";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { usersSlice } from "../../../store/reducers/UsersSlice";
@@ -9,7 +9,6 @@ import { Spinner } from "../../Spinner/Spinner";
 import { validationLoginInputs } from "../../../utils/validationLogin";
 import { $alert } from "../../../Context/alert";
 import { Alert } from "../../Alert/Alert";
-
 
 export const LoginPage = () => {
   const userEmailLoginRef = useRef() as MutableRefObject<HTMLInputElement>;
@@ -43,33 +42,26 @@ export const LoginPage = () => {
   }
 
   const handleLogin = async (email: string, password: string) => {
+    setSpinner(true);
 
     if (!validationLoginInputs(userEmailLoginRef, passwordLoginRef)) {
-      return
-    }
-
-    if (password !== 'cityslicka') {
       setSpinner(false);
-      handleAlertMessage({ alertText: 'Введен неверный пароль', alertStatus: 'warning' });
       return;
     }
 
-    if (!email || !password) {
-      setSpinner(false);
-      handleAlertMessage({ alertText: 'Заполните все поля', alertStatus: 'warning' });
-      return;
+    try {
+      const result = await login(email, password);
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+        dispatch(isLoggedSuccess(!isLogged));
+        handleLoginResponse(true, '/users', 'Вход выполнен');
+      } else {
+        handleLoginResponse(false, '', 'Ошибка входа');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      handleLoginResponse(false, '', 'Ошибка входа');
     }
-
-    if (password.length < 4) {
-      setSpinner(false);
-      handleAlertMessage({ alertText: 'Пароль должен содержать более 4-х символов', alertStatus: 'warning' });
-      return;
-    }
-
-    const result = await AuthUser.login(email, password);
-    setSpinner(true);
-    dispatch(isLoggedSuccess(!isLogged));
-    handleLoginResponse(result, '/users', 'Вход выполнен')
   }
 
   return (
@@ -81,17 +73,33 @@ export const LoginPage = () => {
           className="flex flex-col items-center gap-[16px]"
           onSubmit={handleAuth}>
 
-          <label className="flex flex-col items-left gap-[8px]  w-full">
+          <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Электронная почта</span>
-            <input ref={userEmailLoginRef} type="text" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="example@mail.ru" />
+            <input 
+              ref={userEmailLoginRef} 
+              type="email" 
+              className="p-[16px] bg-[var(--border-color)] rounded-lg" 
+              placeholder="example@mail.ru" 
+              required
+            />
           </label>
 
           <label className="flex flex-col items-left gap-[8px] w-full">
             <span className="text-base">Пароль</span>
-            <input ref={passwordLoginRef} type="password" className="p-[16px] bg-[var(--border-color)] rounded-lg" placeholder="******" />
+            <input 
+              ref={passwordLoginRef} 
+              type="password" 
+              className="p-[16px] bg-[var(--border-color)] rounded-lg" 
+              placeholder="******" 
+              required
+            />
           </label>
 
-          <button className="w-full sm:min-h-[48px] flex items-center justify-center relative bg-[var(--main-color)] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[var(--active-color)] hover:bg-[#8025f7]">
+          <button 
+            type="submit"
+            className="w-full sm:min-h-[48px] flex items-center justify-center relative bg-[var(--main-color)] text-white text-base py-[13px] rounded-[8px] transition-all ease-in-out duration-75 active:bg-[var(--active-color)] hover:bg-[#8025f7]"
+            disabled={spinner}
+          >
             {spinner ? <Spinner top={10} left={50} /> : 'Войти'}
           </button>
         </form>

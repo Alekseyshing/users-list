@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes, Navigate, useParams } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import { LoginPage } from "./components/Auth/Login/LoginPage";
 import { RegistrationPage } from "./components/Auth/Registration/RegistrationPage";
 import { UserPage } from "./components/Users/UserPage/UserPage";
@@ -6,10 +6,7 @@ import { UsersPage } from "./components/Users/UsersPage/UsersPage";
 import { useAppSelector } from "./hooks/redux";
 
 function App() {
-
   const isLoggedIn = useAppSelector(state => state.usersReducer).isLogged;
-  let { userId } = useParams();
-
 
   return (
     <Router>

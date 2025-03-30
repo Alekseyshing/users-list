@@ -4,28 +4,31 @@ import "./styles.css";
 import { Link } from "react-router-dom"
 import { useState } from "react";
 
-export const UserCard = ({ first_name, avatar, last_name, id, like }: IUser) => {
-
+export const UserCard = ({ firstName, lastName, id, like }: IUser) => {
   const [isLiked, setIsLiked] = useState(like);
-  const handleLike = (id: number) => {
+  
+  const handleLike = (id: string) => {
     const users: IUser[] = JSON.parse(localStorage.getItem("users") as string);
-    const indexOfLikedUser = users.map((user) => user.id).indexOf(id)
+    const indexOfLikedUser = users.map((user) => user.id).indexOf(id);
 
     const updatedUser = users.find((item) => item.id === id);
-    (updatedUser as IUser).like = !updatedUser?.like
-    const updUsers = [
-      ...users,
-    ]
-    updUsers[indexOfLikedUser] = updatedUser as IUser;
-    setIsLiked(!isLiked);
-    localStorage.setItem('users', JSON.stringify(updUsers));
+    if (updatedUser) {
+      updatedUser.like = !updatedUser.like;
+      const updUsers = [...users];
+      updUsers[indexOfLikedUser] = updatedUser;
+      setIsLiked(!isLiked);
+      localStorage.setItem('users', JSON.stringify(updUsers));
+    }
   }
 
-
   return (
-    <article key={generateRandomString()} className="flex flex-col gap-[16px] items-center justify-center ">
-      <img src={avatar} alt="user-foto" className="rounded-[50%] min-h-[124px] max-w-[124px] object-cover" />
-      <Link to={`${id}`}>{first_name}&nbsp;{last_name}</Link>
+    <article key={generateRandomString()} className="flex flex-col gap-[16px] items-center justify-center">
+      <div className="w-[124px] h-[124px] rounded-[50%] bg-[var(--border-color)] flex items-center justify-center">
+        <span className="text-2xl text-[var(--main-color)]">
+          {firstName[0]}{lastName[0]}
+        </span>
+      </div>
+      <Link to={`${id}`}>{firstName}&nbsp;{lastName}</Link>
       <button
         onClick={() => handleLike(id)}
         className="p-[8px] bg-[var(--border-color)] rounded-[4px] outline-0 focus:outline-0 border-none 

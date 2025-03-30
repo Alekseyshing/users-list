@@ -20,8 +20,8 @@ export const usersSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    isLoggedSuccess(state, action: PayloadAction<boolean>) {
-      state.isLogged = !state.isLogged;
+    isLoggedSuccess(state, { payload }: PayloadAction<boolean>) {
+      state.isLogged = payload;
     },
     usersFetching(state) {
       state.isLoading = true;
