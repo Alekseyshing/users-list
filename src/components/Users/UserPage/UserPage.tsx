@@ -15,10 +15,10 @@ export const UserPage = () => {
     }
   }, [dispatch, params.userId])
 
-  const email = user?.email;
-  const firstName = user?.firstName;
-  const lastName = user?.lastName;
-  const avatar = user?.avatar;
+  const email = user?.email || '';
+  const firstName = user?.firstName || '';
+  const lastName = user?.lastName || '';
+  const avatar = user?.avatar || '';
 
   return (
     <div>
