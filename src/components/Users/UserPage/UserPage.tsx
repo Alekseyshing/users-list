@@ -15,14 +15,14 @@ export const UserPage = () => {
     }
   }, [dispatch, params.userId])
 
-  const avatar = user?.data?.avatar;
-  const email = user?.data?.email;
-  const first_name = user?.data?.first_name;
-  const last_name = user?.data?.last_name;
+  const email = user?.email;
+  const firstName = user?.firstName;
+  const lastName = user?.lastName;
+  const avatar = user?.avatar;
 
   return (
     <div>
-      <User email={email} first_name={first_name} avatar={avatar} last_name={last_name} />
+      <User email={email} first_name={firstName} avatar={avatar} last_name={lastName} />
     </div>
   )
 }

@@ -6,4 +6,5 @@ export interface IUserDetails {
   isAdmin: boolean;
   createdAt: string;
   like?: boolean;
+  avatar?: string;
 }
