@@ -8,10 +8,18 @@ import userRoutes from './routes/users';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5001;
+
+// CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Vite dev server port
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
 
 // Middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Логирование всех входящих запросов
@@ -27,7 +35,7 @@ app.use('/api/users', userRoutes);
 
 // Подключаемся к базе данных
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  app.listen(PORT, 'localhost', () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
   });
 }); 
