@@ -1,11 +1,8 @@
 import axios from 'axios';
-
-const API_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://users-list-rosy.vercel.app/api'  // Для продакшена используем полный URL
-  : 'http://localhost:5001/api';  // Для разработки используем локальный сервер
+import { REACT_APP_SERVER_URL } from '../vite-env.d';
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL: `${REACT_APP_SERVER_URL}`,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -23,7 +20,7 @@ api.interceptors.request.use((config) => {
 export const login = async (email: string, password: string) => {
   console.log('Attempting login with:', { email, password });
   try {
-    const response = await api.post('/auth/login', { email, password });
+    const response = await api.post('/login', { email, password });
     console.log('Login response:', response.data);
     return response.data;
   } catch (error) {
@@ -35,7 +32,7 @@ export const login = async (email: string, password: string) => {
 export const register = async (email: string, password: string, firstName: string, lastName: string) => {
   console.log('Attempting registration with:', { email, firstName, lastName });
   try {
-    const response = await api.post('/auth/register', { email, password, firstName, lastName });
+    const response = await api.post('/register', { email, password, firstName, lastName });
     console.log('Registration response:', response.data);
     return response.data;
   } catch (error) {
@@ -68,4 +65,4 @@ export const getUser = async (id: string) => {
   }
 };
 
-export default api; 
+export default api;

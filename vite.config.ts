@@ -29,9 +29,10 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:5001',
+        target: 'https://userss.vercel.app',
         changeOrigin: true,
-      },
-    },
+        secure: false,
+      }
+    }
   }
 })
